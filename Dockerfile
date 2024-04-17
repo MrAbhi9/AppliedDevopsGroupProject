@@ -1,12 +1,6 @@
-FROM httpd:latest
-
-# Copy your website content into the container
-COPY ./index.html /usr/local/apache2/htdocs/
-COPY ./style.css /usr/local/apache2/htdocs/
-COPY ./script.js /usr/local/apache2/htdocs/
-
-# Expose the port that the web server will listen on
-EXPOSE 80
-
-# Start the Apache server
-CMD ["httpd-foreground"]
+FROM nginx:1.10.1-alpine
+COPY index.html /usr/share/nginx/html
+COPY script.js /usr/share/nginx/html
+COPY style.css /usr/share/nginx/html
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
