@@ -30,5 +30,16 @@ pipeline {
                     }
                 }
             }
+        stage('Running image on instance') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-credentials') {
+
+                            sh "docker run -d -p 8081:80 mrabhi9/moneyexpensetracker:latest"
+                            
+                        }
+                    }
+                }
+            }
         }
     }
